@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mnemonic_C++", "Mnemonic_C++.vcxproj", "{D56F6A13-D091-42BF-B20D-A46ADF85D961}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Debug|x64.ActiveCfg = Debug|x64
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Debug|x64.Build.0 = Debug|x64
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Debug|x86.ActiveCfg = Debug|Win32
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Debug|x86.Build.0 = Debug|Win32
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Release|x64.ActiveCfg = Release|x64
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Release|x64.Build.0 = Release|x64
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Release|x86.ActiveCfg = Release|Win32
+		{D56F6A13-D091-42BF-B20D-A46ADF85D961}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF49F77C-86BE-4409-A950-A352315DAE52}
+	EndGlobalSection
+EndGlobal
