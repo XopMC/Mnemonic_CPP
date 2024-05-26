@@ -109,6 +109,11 @@ English, ChineseTraditional, ChineseSimplified, Korean , Japanese, Italian, Fren
 
    ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/959f954f-6937-4ef6-9a82-3445263ec4d5)  
 
+# Для счастливых обладателей процессоров AMD Threadripper  
+ Программа умеет работать со всеми ядрами и потоками, важно что-бы сам процессор в БИОС был разблокирован, т.е. мог использовать больше мощности, чем в стоке  
+Пример на Threadripper PRO 7995WX  
+![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/f3bb9a04-93a7-47e3-ab2e-6d4eea6f30f5)  
+![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/50adc5d6-00cc-493c-adb1-fe180d3d9052)  
 
 
 
