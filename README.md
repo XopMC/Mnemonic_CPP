@@ -26,7 +26,7 @@
                         c - compressed address  
                         s - segwit address  
                         e - ethereum address  
-                        x - x coordinate  
+                        x - x coordinate (20-байт публичного ключа)  
                         S - Solana address  
 `-custom файл.txt` -- Указание своего словаря из 2048 слов (каждое слово с новой строки, не работает с параметром `-lang`)  
 `-in` -- Использование внешнего генератора или файла с мнемониками или энтропией  
@@ -91,13 +91,23 @@ English, ChineseTraditional, ChineseSimplified, Korean , Japanese, Italian, Fren
 
 5) Пример запуска из файла, с отображением найденного  
 `MnemonicC.exe -c cus -d der.txt -b btc.blf -b btc_2.blf -t 8 -in -f file.txt`
+где `-f file.txt` -- файл с мнемониками  
 А добавление параметра `save` будет сохранять хэши в виде адресов  
 
 ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/9481c73c-48db-4326-959d-9552122a72d2)  
 
+  Для Эфира и Соланы соответственно  
 
+![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/45d5e30e-97c7-4e18-a93c-37a88e6f92c2)  
 
+6) режим энтропии
+   `MnemonicC.exe -c cusexS -d der.txt -b bloom.blf -in -f test.txt -entropy -n 5 -step 1`  
+![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/89c4cb2f-ac5a-490b-86a2-ffa016ddc0f3)
 
+7) свой словарь + режим энтропии
+   `MnemonicC.exe -c cusexS -d der.txt -b bloom.blf -in -f test.txt -entropy -n 5 -step 1 -custom rus.txt`
+
+   ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/959f954f-6937-4ef6-9a82-3445263ec4d5)  
 
 
 
