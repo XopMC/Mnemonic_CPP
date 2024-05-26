@@ -2,7 +2,7 @@
  Tool for Working with Mnemonics THIS TOOL IS INTENDED SOLELY FOR TESTING THE SECURITY OF YOUR OWN MNEMONICS AND/OR IDENTIFYING OTHER VULNERABILITIES TO ENSURE SECURE ACCESS TO CRYPTOCURRENCIES. THE PRODUCT IS PROVIDED "AS IS".
 
 # ENG  
-## 30.05.2024 - version 1.0.0  
+## 26.05.2024 - version 1.0.0  
 ✅ Implemented mnemonic functionality in C++  
 ✅ Most operations are custom-written (except for hmac and pbdkf2, as the OpenSSL library showed better performance, so it was retained)  
 ✅ Added support for Bloom filters (same type as used by brainflayer)  
@@ -115,7 +115,7 @@ Example on Threadripper PRO 7995WX
 ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/f3bb9a04-93a7-47e3-ab2e-6d4eea6f30f5)  
 ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/50adc5d6-00cc-493c-adb1-fe180d3d9052)  
 # RUS  
-## 30.05.2024 - version 1.0.0  
+## 26.05.2024 - version 1.0.0  
 ✅ Релизована работа с мнемоникой на языке C++  
 ✅ Практически всё операции самописные (за исключением hmac и pbdkf2, почему-то либа OpenSSL показала лучший результат нежели своя реализация, поэтому оставил эту либу)  
 ✅ Реализована поддежрка блюмфильтов (того-же типа, что использует brainflayer)  
