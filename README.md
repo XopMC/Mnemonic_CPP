@@ -1,5 +1,15 @@
 # Mnemonic_CPP
  Tool for Working with Mnemonics THIS TOOL IS INTENDED SOLELY FOR TESTING THE SECURITY OF YOUR OWN MNEMONICS AND/OR IDENTIFYING OTHER VULNERABILITIES TO ENSURE SECURE ACCESS TO CRYPTOCURRENCIES. THE PRODUCT IS PROVIDED "AS IS".
+# Donation:  
+ETH: 0xDE85c1Ef7874A1D94578f11332e8fa9A6a0eE853  
+BTC: bc1q063pks7ex93eka56zyumvutdt6zs9dj959pe9p  
+LTC: ltc1qysumht4lxafwvmcu4ruxzuztc2xmj8tz986fmm  
+TRX: TTZ3oL16BVNzU46MSJvaoKYAhvtwdTUcnz  
+TON: UQC7eqLN_NlVz82YzsjzAo4iOzKjH3t095-CMtqTJ5aoqo0l  
+DOT: 1jen89F5v6TbdQsRaKxsCqhNp9qAdeHeZyEUWjgrM8mW6hs  
+ADA: addr1qx7qrlcy37xe7j58hjxmyhyqfgu0ppeqxzs43dayjjcgde973lzxgtgqzxdvfq3rswmngapc4sp528dpzfg7huam8v9san7h6z  
+DASH: Xms41jaD967XMf2FAfEwGUxYKKhYQuok9T  
+SOLANA: BvDQDEgq3kbNT7VQFQRQPjc4Ta5k7d5s7GdcgoKnq3KG  
 
 # ENG  
 ## 26.05.2024 - version 1.0.0  
