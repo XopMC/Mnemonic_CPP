@@ -45,8 +45,10 @@ English, ChineseTraditional, ChineseSimplified, Korean, Japanese, Italian, Frenc
 `-o file.txt` -- Save found results to the specified file  
 `-save` -- Save found hashes as addresses  
 `-w number of words` -- 3, 6, 9, 12, 15, 18, 21, 24 ... 48 - Number of words for mnemonic generator (default is 12)  
-
+# Download builds   
+-  https://github.com/XopMC/Mnemonic_CPP/releases/tag/v.1.0.0  
 # Building from Source  
+Download builds - https://github.com/XopMC/Mnemonic_CPP/releases/tag/v.1.0.0  
 The release on GitHub already includes builds for 3 systems, but if you need to build it yourself, here are the steps:  
 ## Windows Build  
 The files already contain a Visual Studio project - you just need to install the OpenSSL library for a successful build (this can be done using VCPKG)  
@@ -156,7 +158,8 @@ English, ChineseTraditional, ChineseSimplified, Korean , Japanese, Italian, Fren
 `-o файл.txt` -- Сохранение найденого в указанный файл  
 `-save` -- Сохранение найденых хэшей в виде адресов  
 `-w кол-во слов` -- 3, 6, 9, 12, 15, 18, 21, 24 ... 48 - Количество слов для генератора мнемоники (По стандарту 12)  
-
+# Скачать готовые сборки  
+-  https://github.com/XopMC/Mnemonic_CPP/releases/tag/v.1.0.0  
 # Сборка из исходников  
 В Release на GitHub уже есть сборки для 3-х систем, однако если вам нужно собрать самостоятельно, то вот шаги действий для этого:  
 ## Windows сборка  
