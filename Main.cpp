@@ -44,7 +44,7 @@ HANDLE printMutex;
 #include <pthread.h>
 pthread_mutex_t fileMutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t printMutex = PTHREAD_MUTEX_INITIALIZER;
-
+pthread_mutex_t inputMutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
 #if defined(__x86_64__) || defined(_M_X64)
@@ -4869,12 +4869,18 @@ void workerThread(std::istream& stream) {
 }
 #else
 void* workerThreadFile(void* arg) {
-	std::istream* stream = reinterpret_cast<istream*>(arg);
+	std::istream* stream = (std::istream*) arg;
 	std::string line;
 
-	if (!isHex)
-	{
-		while (std::getline(*stream, line)) {
+	if (!isHex) {
+		while (true) {
+			pthread_mutex_lock(&inputMutex);
+			if (!std::getline(*stream, line)) {
+				pthread_mutex_unlock(&inputMutex);
+				break;
+			}
+			pthread_mutex_unlock(&inputMutex);
+
 			if (!line.empty() && line.back() == '\r') {
 				line.pop_back();
 			}
@@ -4882,17 +4888,20 @@ void* workerThreadFile(void* arg) {
 			uint8_t hmac_sol[64];
 			mnemonic_to_masterkey(line, hmac, hmac_sol);
 			key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], line);
-
 		}
-		isRunning = false;
 	}
-	else
-	{
-        char current_entr[1024] = { 0 };
-        uint8_t hmac[64];
-        uint8_t hmac_sol[64];
-        string mnemonic;
-		while (std::getline(*stream, line)) {
+	else {
+		char current_entr[1024] = { 0 };
+		uint8_t hmac[64];
+		uint8_t hmac_sol[64];
+		std::string mnemonic;
+		while (true) {
+			pthread_mutex_lock(&inputMutex);
+			if (!std::getline(*stream, line)) {
+				pthread_mutex_unlock(&inputMutex);
+				break;
+			}
+			pthread_mutex_unlock(&inputMutex);
 
 			if (!line.empty() && line.back() == '\r') {
 				line.pop_back();
@@ -4901,60 +4910,53 @@ void* workerThreadFile(void* arg) {
 			while (line.size() % 8 != 0 || line.size() < 8) {
 				line.insert(0, "0");
 			}
-			if (n == 0)
-			{
+			if (n == 0) {
 				unhex((unsigned char*)line.data(), line.size(), (unsigned char*)current_entr, line.size() / 2);
 				GenerateMnemonic(current_entr, line.size() / 2, mnemonic, current_dict);
 				mnemonic_to_masterkey(mnemonic, hmac, hmac_sol);
 				key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], mnemonic);
 			}
-			else
-			{
+			else {
 				unhex((unsigned char*)line.data(), line.size(), (unsigned char*)current_entr, line.size() / 2);
-				for (int i = 0; i <= n; i++)
-				{
-
+				for (int i = 0; i <= n; i++) {
 					GenerateMnemonic(current_entr, line.size() / 2, mnemonic, current_dict);
 					mnemonic_to_masterkey(mnemonic, hmac, hmac_sol);
 					key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], mnemonic);
 					Increment_byte((unsigned char*)current_entr, line.size() / 2, step);
-
-
 				}
 			}
-			
-
 		}
-		isRunning = false;
-
 	}
+	isRunning = false;
 	return NULL;
 }
-void* Entropy_Rand_Thread(void* arg)
-{
 
+void* Entropy_Rand_Thread(void* arg) {
 	char current_entr[1024] = { 0 };
-	string mnemonic;
+	std::string mnemonic;
 	uint8_t hmac[64];
 	uint8_t hmac_sol[64];
-	while (true)
-	{
+	while (true) {
 		Random_Bytes((unsigned char*)current_entr, entropy_len);
 		GenerateMnemonic(current_entr, entropy_len, mnemonic, current_dict);
 		mnemonic_to_masterkey(mnemonic, hmac, hmac_sol);
 		key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], mnemonic);
-		
 	}
-
-
 }
+
 void* workerThread(void* arg) {
-	std::istream* stream = reinterpret_cast<istream*>(arg);
+	std::istream* stream = (std::istream*)arg;
 	std::string line;
 
-	if (!isHex)
-	{
-		while (std::getline(*stream, line)) {
+	if (!isHex) {
+		while (true) {
+			pthread_mutex_lock(&inputMutex);
+			if (!std::getline(*stream, line)) {
+				pthread_mutex_unlock(&inputMutex);
+				break;
+			}
+			pthread_mutex_unlock(&inputMutex);
+
 			if (!line.empty() && line.back() == '\r') {
 				line.pop_back();
 			}
@@ -4962,17 +4964,20 @@ void* workerThread(void* arg) {
 			uint8_t hmac_sol[64];
 			mnemonic_to_masterkey(line, hmac, hmac_sol);
 			key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], line);
-
 		}
-		isRunning = false;
 	}
-	else
-	{
-        char current_entr[1024] = { 0 };
-        uint8_t hmac[64];
-        uint8_t hmac_sol[64];
-        string mnemonic;
-		while (std::getline(*stream, line)) {
+	else {
+		char current_entr[1024] = { 0 };
+		uint8_t hmac[64];
+		uint8_t hmac_sol[64];
+		std::string mnemonic;
+		while (true) {
+			pthread_mutex_lock(&inputMutex);
+			if (!std::getline(*stream, line)) {
+				pthread_mutex_unlock(&inputMutex);
+				break;
+			}
+			pthread_mutex_unlock(&inputMutex);
 
 			if (!line.empty() && line.back() == '\r') {
 				line.pop_back();
@@ -4981,33 +4986,24 @@ void* workerThread(void* arg) {
 			while (line.size() % 8 != 0 || line.size() < 8) {
 				line.insert(0, "0");
 			}
-			if (n == 0)
-			{
+			if (n == 0) {
 				unhex((unsigned char*)line.data(), line.size(), (unsigned char*)current_entr, line.size() / 2);
 				GenerateMnemonic(current_entr, line.size() / 2, mnemonic, current_dict);
 				mnemonic_to_masterkey(mnemonic, hmac, hmac_sol);
 				key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], mnemonic);
 			}
-			else
-			{
+			else {
 				unhex((unsigned char*)line.data(), line.size(), (unsigned char*)current_entr, line.size() / 2);
-				for (int i = 0; i <= n; i++)
-				{
-
+				for (int i = 0; i <= n; i++) {
 					GenerateMnemonic(current_entr, line.size() / 2, mnemonic, current_dict);
 					mnemonic_to_masterkey(mnemonic, hmac, hmac_sol);
 					key_to_hash160((extended_private_key_t*)&hmac[0], (extended_private_key_t*)&hmac_sol[0], mnemonic);
 					Increment_byte((unsigned char*)current_entr, line.size() / 2, step);
-
-
 				}
 			}
-			
-
 		}
-		isRunning = false;
-
 	}
+	isRunning = false;
 	return NULL;
 }
 #endif
