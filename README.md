@@ -14,7 +14,7 @@ SOLANA: BvDQDEgq3kbNT7VQFQRQPjc4Ta5k7d5s7GdcgoKnq3KG
 # ENG  
 ## 26.05.2024 - version 1.0.0  
 ✅ Implemented mnemonic functionality in C++  
-✅ Most operations are custom-written (except for hmac and pbdkf2, as the OpenSSL library showed better performance, so it was retained)  
+✅ Most operations are custom-written (except for hmac and pbkdf2, as the OpenSSL library showed better performance, so it was retained)  
 ✅ Added support for Bloom filters (same type as used by brainflayer)  
 ✅ Integrated with external generators and files containing mnemonics or entropy  
 ✅ Fully implemented SLIP-0010 (for secp256k1 and ed25519 curves) - https://slips.readthedocs.io/en/latest/slip-0010/  
@@ -127,7 +127,7 @@ Example on Threadripper PRO 7995WX
 # RUS  
 ## 26.05.2024 - version 1.0.0  
 ✅ Релизована работа с мнемоникой на языке C++  
-✅ Практически всё операции самописные (за исключением hmac и pbdkf2, почему-то либа OpenSSL показала лучший результат нежели своя реализация, поэтому оставил эту либу)  
+✅ Практически всё операции самописные (за исключением hmac и pbkdf2, почему-то либа OpenSSL показала лучший результат нежели своя реализация, поэтому оставил эту либу)  
 ✅ Реализована поддежрка блюмфильтов (того-же типа, что использует brainflayer)  
 ✅ Работа с внешними генераторами и файлами с мнемониками или энтропиями   
 ✅ Рабочая реализация SLIP-0010 (для кривых secp256k1 и ed25519) - https://slips.readthedocs.io/en/latest/slip-0010/  
