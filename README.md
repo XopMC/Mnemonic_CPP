@@ -70,7 +70,7 @@ Example:
 To create them, in the GitHub Release menu for each system, I've included these programs:  
 `base58-bech32_to_hash160` -- Program for converting different types of addresses into a 20-byte hash, tested on BTC, BCH, Tron, ETH, LTC addresses - other currencies need testing  
 `Solana_to_hex` -- Converts Solana addresses into a 20-byte public key  
-`hex_to_bloom` -- Creates Bloom filters from the specified file with hashes. The program itself will split the file into the necessary number of Bloom filters, controlled by the `-capacity` parameter - I recommend not setting more than 40000000, which is the number of hashes in one Bloom filter  
+`hex_to_bloom` -- Creates Bloom filters from the specified file with hashes. The program itself will split the file into the necessary number of Bloom filters, controlled by the `-capacity` parameter - I recommend not setting more than 38000000, which is the number of hashes in one Bloom filter  
 ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/44dc06d9-25f8-4085-bfec-fe50d46c5bca)  
 
 3) Example of generating 12 random words:  
@@ -182,7 +182,7 @@ English, ChineseTraditional, ChineseSimplified, Korean , Japanese, Italian, Fren
 Для того, что-бы их сделать, в меню Release GitHub для каждой системы я собрал эти программы:  
 `base58-bech32_to_hash160` -- Программа для преобразования разных типов адресов в 20-байт хэш, проверял на адресах BTC, BCH, Tron, ETH, LTC - другие валюты нужно тестировать  
 `Solana_to_hex` -- Преобразует адреса соланы в 20-байт публичного ключа  
-`hex_to_bloom` -- создает блюмфильтры из указанного файла с хэшами. Программа сама разделит файл на нужное кол-во блюмфильтров, управляется параметром `-capacity` - рекомендую не ставить более 40000000, это количество хэшей в одном блюме  
+`hex_to_bloom` -- создает блюмфильтры из указанного файла с хэшами. Программа сама разделит файл на нужное кол-во блюмфильтров, управляется параметром `-capacity` - рекомендую не ставить более 38000000, это количество хэшей в одном блюме  
 ![image](https://github.com/XopMC/Mnemonic_CPP/assets/89750173/44dc06d9-25f8-4085-bfec-fe50d46c5bca)  
 
 
