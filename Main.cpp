@@ -5353,7 +5353,7 @@ int main(int argc, char** argv) {
 		if (cust)
 		{
 			std::wifstream file(custom_file);
-			
+			file.imbue(std::locale(file.getloc(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::consume_header>));
 			if (!file) {
 				printf("Не удалось открыть файл\n");
 				return 1;
