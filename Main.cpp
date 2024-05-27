@@ -3938,7 +3938,7 @@ typedef union xpoint_u {
 } xpoint_t;
 
 typedef union solana_u {
-	uint8_t uc[32];
+	unsigned char uc[32];
 	uint32_t      ul[32 >> 2];
 } solana_t;
 
@@ -4361,7 +4361,7 @@ static void key_to_hash160(
 
 		if (path == "m/" || path == "m")
 		{
-						if (Ethereum || Compressed || Uncompressed || Segwit || Xpoint)
+			if (Ethereum || Compressed || Uncompressed || Segwit || Xpoint)
 			{
 				calc_public(&start_key, &target_public_key);
 			}
@@ -4393,18 +4393,20 @@ static void key_to_hash160(
 			if (Xpoint) 
 			{
 				xpoint_t xpoint;
-																				memcpy(xpoint.uc, &target_public_key.key[0], 32);
+				memcpy(xpoint.uc, &target_public_key.key[0], 32);
 				check_xpoint(xpoint, "X", path, start_key, mnemonic);
 				totalHashes++;
 
 
-							}
+			}
 			if (Solana)
 			{
 				solana_t solana;
 				unsigned char seed[32];
+				unsigned char public_key[32];
 
-				ed25519_create_keypair(solana.uc, seed, solana_start_key.key);
+				ed25519_create_keypair(public_key, seed, solana_start_key.key);
+				memcpy(solana.uc, public_key, 32);
 				check_solana(solana, "SOL", path, solana_start_key, mnemonic);
 				totalHashes++;
 
@@ -4415,7 +4417,7 @@ static void key_to_hash160(
 		{
 			if (path.length() > 1 && path.substr(0, 1) == "m")
 			{
-								path = path.substr(1);
+				path = path.substr(1);
 			}
 			path = path + "/";
 			
@@ -4424,7 +4426,7 @@ static void key_to_hash160(
 				child_key_hardened = true;
 				path.pop_back();
 			}*/
-						size_t tokenStart = 0;
+			size_t tokenStart = 0;
 			size_t tokenEnd = path.find("/", tokenStart);
 			uint32_t result = 0;
 			while (tokenEnd != std::string::npos)
@@ -4460,7 +4462,7 @@ static void key_to_hash160(
 				{
 					break;
 				}
-								if (key_hard)
+				if (key_hard)
 				{
 					hardened_private_child_from_private(&start_key, &target_key, result);
 				}
@@ -4483,8 +4485,8 @@ static void key_to_hash160(
 
 
 			}
-						path.pop_back();
-									string hard = "";
+			path.pop_back();
+			string hard = "";
 			if (child_key_hardened == true)
 			{
 				path.pop_back();
@@ -4492,7 +4494,7 @@ static void key_to_hash160(
 			}
 			string last_index = to_string(result);
 			path.resize(path.size() - last_index.length());
-									for ( uint32_t i = 0; i <= num_childs; i++)
+			for ( uint32_t i = 0; i <= num_childs; i++)
 			{
 			string paths = path + to_string(result + i) + hard;
 							/*printf("start key : %02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\n",
@@ -4519,7 +4521,7 @@ static void key_to_hash160(
 				
 				}
 				
-																																																								if (Ethereum || Compressed || Uncompressed || Segwit || Xpoint) {
+				if (Ethereum || Compressed || Uncompressed || Segwit || Xpoint) {
 					calc_public(&target_key, &target_public_key);
 				}
 				if (Solana)
@@ -4541,7 +4543,7 @@ static void key_to_hash160(
 						hash.uc[10], hash.uc[11], hash.uc[12], hash.uc[13], hash.uc[14],
 						hash.uc[15], hash.uc[16], hash.uc[17], hash.uc[18], hash.uc[19]);*/
 					check(hash, "E", "m" + paths, target_key, mnemonic);
-										totalHashes++;
+					totalHashes++;
 				}
 				if (Compressed)
 				{
@@ -4557,13 +4559,13 @@ static void key_to_hash160(
 				if (Uncompressed)
 				{
 					calc_uncompressed_hash160(&target_public_key, hash.ul);
-																														check(hash, "U", "m" + paths, target_key, mnemonic);
+					check(hash, "U", "m" + paths, target_key, mnemonic);
 					totalHashes++;
 				}
 				if (Segwit)
 				{
 					calc_segwit_hash160(&target_public_key, hash.ul);
-																														check(hash, "S", "m" + paths, target_key, mnemonic);
+					check(hash, "S", "m" + paths, target_key, mnemonic);
 					totalHashes++;
 				}
 				if (Xpoint)
