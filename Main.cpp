@@ -47,6 +47,9 @@ pthread_mutex_t printMutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t inputMutex = PTHREAD_MUTEX_INITIALIZER;
 #endif
 
+#include <cstring>  
+#include <random>  
+
 #if defined(__x86_64__) || defined(_M_X64)
 #include <immintrin.h>  
 
@@ -62,6 +65,14 @@ static void Random_Bytes(unsigned char* bytes, size_t size) {
 			size_t copySize = (i + 8 <= size) ? 8 : size - i;
 			memcpy(bytes + i, &randomValue, copySize);
 		}
+		else {
+			std::random_device rd;
+			std::mt19937_64 gen(rd());
+			for (size_t j = i; j < size; ++j) {
+				bytes[j] = gen();
+			}
+			return;
+		}
 	}
 }
 
@@ -71,7 +82,7 @@ static void Random_Bytes(unsigned char* bytes, size_t size) {
 
 static void Random_Bytes(unsigned char* bytes, size_t size) {
 	arc4random_buf(bytes, size);
-}
+		}
 
 #else
 #include <unistd.h>
@@ -80,9 +91,26 @@ static void Random_Bytes(unsigned char* bytes, size_t size) {
 
 static void Random_Bytes(unsigned char* bytes, size_t size) {
 	ssize_t result = syscall(SYS_getrandom, bytes, size, 0);
+	if (result < 0) {
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		for (size_t i = 0; i < size; ++i) {
+			bytes[i] = gen();
+		}
+	}
 }
 #endif
+
+#else
+static void Random_Bytes(unsigned char* bytes, size_t size) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	for (size_t i = 0; i < size; ++i) {
+		bytes[i] = gen();
+	}
+}
 #endif
+
 
 
 using namespace std;
