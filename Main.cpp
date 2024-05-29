@@ -56,16 +56,24 @@ pthread_mutex_t inputMutex = PTHREAD_MUTEX_INITIALIZER;
 static void Random_Bytes(unsigned char* bytes, size_t size) {
 #if defined(_WIN64) && !defined(__CYGWIN__) && !defined(__MINGW64__)
 	uint64_t randomValue;
-
 #else
 	unsigned long long randomValue;
 #endif
 	for (size_t i = 0; i < size; i += 8) {
-		if (_rdrand64_step(&randomValue)) {
-			size_t copySize = (i + 8 <= size) ? 8 : size - i;
-			memcpy(bytes + i, &randomValue, copySize);
+		try {
+			if (_rdrand64_step(&randomValue)) {
+				size_t copySize = (i + 8 <= size) ? 8 : size - i;
+				memcpy(bytes + i, &randomValue, copySize);
+			}
+			else {
+				std::random_device rd;
+				std::mt19937 gen(rd());
+				for (size_t i = 0; i < size; ++i) {
+					bytes[i] = gen();
+				}
+			}
 		}
-		else {
+		catch (...) {
 			std::random_device rd;
 			std::mt19937_64 gen(rd());
 			for (size_t j = i; j < size; ++j) {
@@ -81,8 +89,17 @@ static void Random_Bytes(unsigned char* bytes, size_t size) {
 #include <stdlib.h> 
 
 static void Random_Bytes(unsigned char* bytes, size_t size) {
-	arc4random_buf(bytes, size);
+	try {
+		arc4random_buf(bytes, size);
+	}
+	catch (...) {
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		for (size_t i = 0; i < size; ++i) {
+			bytes[i] = gen();
 		}
+	}
+}
 
 #else
 #include <unistd.h>
@@ -90,13 +107,21 @@ static void Random_Bytes(unsigned char* bytes, size_t size) {
 #include <linux/random.h>
 
 static void Random_Bytes(unsigned char* bytes, size_t size) {
-	ssize_t result = syscall(SYS_getrandom, bytes, size, 0);
-	if (result < 0) {
+	try {
+		ssize_t result = syscall(SYS_getrandom, bytes, size, 0);
+		if (result < 0) {
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			for (size_t i = 0; i < size; ++i) {
+				bytes[i] = gen();
+			}
+	}
+	catch (...) {
 		std::random_device rd;
 		std::mt19937 gen(rd());
 		for (size_t i = 0; i < size; ++i) {
 			bytes[i] = gen();
-		}
+}
 	}
 }
 #endif
